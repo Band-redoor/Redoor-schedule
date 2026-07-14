@@ -115,6 +115,13 @@ function renderCalendar() {
 
     if (otherMonth) cell.classList.add("other-month");
     if (events.length > 0) cell.classList.add("has-event");
+    const today = new Date();
+const todayKey =
+  `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
+if (dateKey === todayKey) {
+  cell.classList.add("today");
+}
     if (selectedDate === dateKey) cell.classList.add("selected");
 
     const number = document.createElement("span");
