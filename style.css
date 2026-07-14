@@ -193,7 +193,7 @@ button, a {
   display: block;
   width: 18px;
   height: 2px;
-  margin-top: 5px;
+  margin-top: 2px;
   background: var(--black);
 }
 
@@ -274,9 +274,9 @@ button, a {
 .eyebrow,
 .event-date {
   margin: 0 0 18px;
-  font-size: 12px;
+  font-size: 24px;
   font-weight: 800;
-  letter-spacing: .04em;
+  letter-spacing: .02em;
 }
 
 .empty-state h2,
@@ -423,6 +423,6 @@ button, a {
   .date-cell.has-event .date-number::after {
     width: 14px;
     height: 2px;
-    margin-top: 4px;
+    margin-top: 2px;
   }
 }
