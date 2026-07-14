@@ -24,7 +24,12 @@ function formatDateKey(year, month, date) {
 }
 
 function getEventsByDate(dateKey) {
-  return REDOOR_EVENTS.filter(event => event.date === dateKey);
+  return REDOOR_EVENTS.filter(event => {
+    if (event.yearly) {
+      return event.date.slice(5) === dateKey.slice(5);
+    }
+    return event.date === dateKey;
+  });
 }
 
 function formatUpcomingDate(dateString) {
