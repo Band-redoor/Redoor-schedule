@@ -224,7 +224,7 @@ function eventBlock(event) {
   `;
 }
 
-function function selectEvents(events, dateKey = events[0].date) {
+function selectEvents(events, dateKey = events[0].date) {
   selectedDate = datekey;
   renderCalendar();
 
