@@ -515,4 +515,5 @@ button:focus {
   display: block;
   width:165px;
   height: auto;
+  margin-left: -6px;
 }
