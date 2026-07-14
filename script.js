@@ -53,8 +53,10 @@ function ticketHtml(tickets) {
         ${tickets
           .map(
             t =>
-              `<a class="ticket-link" href="${t.url}" target="_blank" rel="noopener noreferrer">${t.name}</a>`
-          )
+  t.url
+    ? `<a class="ticket-link" href="${t.url}" target="_blank" rel="noopener noreferrer">${t.name}</a>`
+    : `<span>${t.name}</span>`
+    )
           .join(", ")}
       </div>
     </div>
