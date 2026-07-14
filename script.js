@@ -193,7 +193,12 @@ function eventBlock(event) {
       <span class="event-type">${event.type}</span>
 
       <div class="detail-list">
-        ${optionalDetailRow("TIME", event.time)}
+        ${optionalDetailRow(
+  "TIME",
+  event.kstTime
+    ? `현지 ${event.time} / 한국 ${event.kstTime}`
+    : event.time
+)}
         ${optionalDetailRow("LOCATION", event.location)}
         ${ticketHtml(event.ticket)}
       </div>
