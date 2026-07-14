@@ -75,7 +75,7 @@ const REDOOR_EVENTS = [
     type: "FESTIVAL",
     title: "2026 Jeonju Ultimate Music Festival",
     time: "",
-    location: "전주대학교 축구장",
+    location: "전주대학교 인조잔디구장",
     ticket: "YES24 티켓"
   },
   {
