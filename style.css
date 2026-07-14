@@ -191,7 +191,7 @@ button, a {
 .date-cell.has-event .date-number::after {
   content: "";
   display: block;
-  width: 18px;
+  width: 17.5px;
   height: 2px;
   margin-top: 2px;
   background: var(--black);
