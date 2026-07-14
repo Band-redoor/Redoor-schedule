@@ -200,6 +200,12 @@ function renderCalendar() {
     const number = document.createElement("span");
     number.className = "date-number";
     number.textContent = cellDate;
+    
+    if (cellDate < 10) {
+
+  number.classList.add("single-digit");
+
+}
     cell.appendChild(number);
 
     if (events.length > 0) {
