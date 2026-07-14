@@ -34,13 +34,13 @@ function formatUpcomingDate(dateString) {
 }
 
 function renderCalendar() {
-  monthTitle.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+  monthTitle.textContent = `${pad(currentMonth + 1)} ${monthNames[currentMonth]}`;
   calendarGrid.innerHTML = "";
 
   const firstDay = new Date(currentYear, currentMonth, 1).getDay();
   const lastDate = new Date(currentYear, currentMonth + 1, 0).getDate();
   const previousMonthLastDate = new Date(currentYear, currentMonth, 0).getDate();
-  const totalCells = 42;
+  const totalCells = Math.ceil((firstDay + lastDate) / 7) * 7;
 
   for (let index = 0; index < totalCells; index += 1) {
     let cellYear = currentYear;
@@ -90,11 +90,6 @@ function renderCalendar() {
       title.className = "event-title-mini";
       title.textContent = events[0].title;
       cell.appendChild(title);
-
-      const tag = document.createElement("span");
-      tag.className = "event-tag";
-      tag.textContent = events[0].type;
-      cell.appendChild(tag);
 
       cell.addEventListener("click", () => selectEvent(events[0]));
     } else {

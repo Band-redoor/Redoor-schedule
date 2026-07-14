@@ -1,18 +1,13 @@
-# REDOOR Schedule V3
+# REDOOR Schedule V5
 
 ## 변경된 부분
-- 상세 화면에서 SETLIST / PHOTOS / VIDEOS / REVIEWS 제거
-- 상세 화면은 날짜, 분류, 시간, 장소, 예매 링크, 메모만 표시
-- 달력 숫자를 각 칸의 왼쪽 위에 정렬
-- 현재 달/다른 달 구분과 테두리 설정은 유지
+- 필요 없는 마지막 주 자동 삭제
+- 달마다 필요한 행 수만 표시
+- 상단 월 표기를 `08 AUGUST` 형식으로 변경
+- 기존의 현재 달/다른 달 구분과 테두리 설정 유지
 
-## GitHub에 교체할 파일
+## GitHub에 덮어쓸 파일
 - index.html
 - style.css
-- events.js
 - script.js
-
-## 일정 분류
-- LIVE: 단독공연
-- FESTIVAL: 페스티벌 및 대학축제
-- BIRTHDAY: 멤버 생일
+- events.js

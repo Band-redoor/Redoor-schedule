@@ -76,7 +76,7 @@ button, a {
 .calendar-toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 20px;
   margin-bottom: 26px;
 }
@@ -107,19 +107,6 @@ button, a {
   background: var(--soft);
 }
 
-.legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.legend span {
-  padding: 7px 10px;
-  border: 1px solid var(--black);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .04em;
-}
 
 .calendar-frame {
   border: 2px solid var(--black);
@@ -149,7 +136,7 @@ button, a {
   appearance: none;
   position: relative;
   min-height: 112px;
-  padding: 12px;
+  padding: 6px 7px;
   border: 0;
   border-right: 1px solid var(--inner-line);
   border-bottom: 1px solid var(--inner-line);
@@ -197,25 +184,11 @@ button, a {
   line-height: 1;
 }
 
-.event-tag {
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 12px;
-  padding: 7px 8px 6px;
-  background: var(--black);
-  color: var(--white);
-  text-align: center;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .08em;
-  line-height: 1;
-}
 
 .event-title-mini {
   display: block;
-  margin-top: 9px;
-  padding-right: 4px;
+  margin-top: 7px;
+  padding-right: 2px;
   font-size: 10px;
   font-weight: 700;
   line-height: 1.3;
@@ -409,7 +382,7 @@ button, a {
 
   .date-cell {
     min-height: 76px;
-    padding: 8px 6px;
+    padding: 5px 6px;
   }
 
   .date-number {
@@ -420,20 +393,6 @@ button, a {
 
   .event-title-mini {
     display: none;
-  }
-
-  .event-tag {
-    left: 5px;
-    right: 5px;
-    bottom: 6px;
-    padding: 5px 2px 4px;
-    font-size: 7px;
-    letter-spacing: .02em;
-  }
-
-  .legend span {
-    padding: 6px 8px;
-    font-size: 9px;
   }
 
   .upcoming-item {
