@@ -10,6 +10,7 @@ const REDOOR_EVENTS = [
     date: "2026-01-01",
     type: "BIRTHDAY",
     title: "이등대 생일",
+    yearly: true
     time: "",
     location: "",
     ticket: ""
@@ -18,6 +19,7 @@ const REDOOR_EVENTS = [
     date: "2026-04-17",
     type: "BIRTHDAY",
     title: "박세웅 생일",
+    yearly: true
     time: "",
     location: "",
     ticket: ""
@@ -26,6 +28,7 @@ const REDOOR_EVENTS = [
     date: "2026-05-12",
     type: "BIRTHDAY",
     title: "최승현 생일",
+    yearly: true
     time: "",
     location: "",
     ticket: ""
@@ -84,6 +87,7 @@ const REDOOR_EVENTS = [
     date: "2026-08-26",
     type: "BIRTHDAY",
     title: "주상욱 생일",
+    yearly: true
     time: "",
     location: "",
     ticket: ""
