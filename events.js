@@ -34,7 +34,7 @@ const REDOOR_EVENTS = [
     date: "2026-07-17",
     type: "FESTIVAL",
     title: "Road to BU-ROCK Fukuoka",
-    time: "18:30 JST",
+    time: "18:30",
     location: "후쿠오카 DRUM LOGOS",
     ticket: "마호캐스트"
   },
