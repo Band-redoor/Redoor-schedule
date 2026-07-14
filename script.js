@@ -5,8 +5,9 @@ const eventPanel = document.getElementById("eventPanel");
 const prevMonthButton = document.getElementById("prevMonth");
 const nextMonthButton = document.getElementById("nextMonth");
 
-let currentYear = 2026;
-let currentMonth = 7; // 0부터 시작: 7은 8월
+const today = new Date();
+let currentYear = today.getFullYear();
+let currentMonth = today.getMonth();
 let selectedDate = null;
 
 const monthNames = [
@@ -31,6 +32,42 @@ function formatUpcomingDate(dateString) {
   const month = monthNames[date.getMonth()].slice(0, 3);
   const weekday = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"][date.getDay()];
   return `${month} ${date.getDate()} ${weekday}`;
+}
+
+function isUrl(value) {
+  return /^https?:\/\//i.test(value || "");
+}
+
+function ticketHtml(ticket) {
+  if (!ticket) return "";
+
+  if (isUrl(ticket)) {
+    return `
+      <div class="detail-row">
+        <div class="detail-label">TICKET</div>
+        <div class="detail-value">
+          <a class="ticket-link" href="${ticket}" target="_blank" rel="noopener">예매하기 ↗</a>
+        </div>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="detail-row">
+      <div class="detail-label">TICKET</div>
+      <div class="detail-value">${ticket}</div>
+    </div>
+  `;
+}
+
+function optionalDetailRow(label, value) {
+  if (!value) return "";
+  return `
+    <div class="detail-row">
+      <div class="detail-label">${label}</div>
+      <div class="detail-value">${value}</div>
+    </div>
+  `;
 }
 
 function renderCalendar() {
@@ -88,10 +125,13 @@ function renderCalendar() {
     if (events.length > 0) {
       const title = document.createElement("span");
       title.className = "event-title-mini";
-      title.textContent = events[0].title;
+      title.textContent =
+        events.length > 1
+          ? `${events[0].title} 외 ${events.length - 1}건`
+          : events[0].title;
       cell.appendChild(title);
 
-      cell.addEventListener("click", () => selectEvent(events[0]));
+      cell.addEventListener("click", () => selectEvents(events));
     } else {
       cell.disabled = true;
     }
@@ -106,7 +146,11 @@ function renderUpcoming() {
   const monthPrefix = `${currentYear}-${pad(currentMonth + 1)}`;
   const monthEvents = REDOOR_EVENTS
     .filter(event => event.date.startsWith(monthPrefix))
-    .sort((a, b) => a.date.localeCompare(b.date));
+    .sort((a, b) => {
+      const dateCompare = a.date.localeCompare(b.date);
+      if (dateCompare !== 0) return dateCompare;
+      return (a.time || "").localeCompare(b.time || "");
+    });
 
   upcomingList.innerHTML = "";
 
@@ -123,48 +167,47 @@ function renderUpcoming() {
       <div class="upcoming-date">${formatUpcomingDate(event.date)}</div>
       <div>
         <div class="upcoming-title">[${event.type}] ${event.title}</div>
-        <div class="upcoming-meta">${event.location || ""}${event.city ? ` · ${event.city}` : ""}</div>
+        <div class="upcoming-meta">${event.location || ""}</div>
       </div>
       <div class="upcoming-time">${event.time || ""} &nbsp;›</div>
     `;
-    item.addEventListener("click", () => selectEvent(event));
+    item.addEventListener("click", () => selectEvents([event]));
     upcomingList.appendChild(item);
   });
 }
 
-function selectEvent(event) {
-  selectedDate = event.date;
+function eventBlock(event) {
+  return `
+    <section class="selected-event">
+      <h2>${event.title}</h2>
+      <span class="event-type">${event.type}</span>
+
+      <div class="detail-list">
+        ${optionalDetailRow("TIME", event.time)}
+        ${optionalDetailRow("LOCATION", event.location)}
+        ${ticketHtml(event.ticket)}
+      </div>
+    </section>
+  `;
+}
+
+function selectEvents(events) {
+  selectedDate = events[0].date;
   renderCalendar();
 
   eventPanel.innerHTML = `
     <button class="close-button" type="button" aria-label="상세 닫기">×</button>
-    <p class="event-date">${event.date.replaceAll("-", ".")}</p>
-    <h2>${event.title}</h2>
-    <span class="event-type">${event.type}</span>
-
-    <div class="detail-list">
-      <div class="detail-row">
-        <div class="detail-label">TIME</div>
-        <div class="detail-value">${event.time || "-"}</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-label">LOCATION</div>
-        <div class="detail-value">${event.location || "-"}</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-label">TICKET</div>
-        <div class="detail-value">
-          ${event.ticketUrl
-            ? `<a class="ticket-link" href="${event.ticketUrl}" target="_blank" rel="noopener">예매하기 ↗</a>`
-            : "예매 링크 없음"}
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-label">MEMO</div>
-        <div class="detail-value">${event.memo || "-"}</div>
-      </div>
-    </div>
+    <p class="event-date">${selectedDate.replaceAll("-", ".")}</p>
+    ${events.map(event => eventBlock(event)).join("")}
   `;
+
+  eventPanel.querySelectorAll(".selected-event").forEach((block, index) => {
+    if (index > 0) {
+      block.style.marginTop = "42px";
+      block.style.paddingTop = "42px";
+      block.style.borderTop = "1px solid var(--inner-line)";
+    }
+  });
 
   eventPanel.querySelector(".close-button").addEventListener("click", resetPanel);
 
