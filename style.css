@@ -197,6 +197,9 @@ button, a {
   background: var(--black);
 }
 
+.date-cell.has-event .date-number.single-digit::after {
+  width: 12px;
+}
 
 .event-title-list {
   position: absolute;
