@@ -51,6 +51,7 @@ const REDOOR_EVENTS = [
     type: "LIVE",
     title: "Billboard Live TAIPEI (1st Show)",
     time: "16:00",
+    kstTime: "17:00",
     location: "Billboard Live TAIPEI",
     ticket: "Billboard Live"
   },
@@ -59,6 +60,7 @@ const REDOOR_EVENTS = [
     type: "LIVE",
     title: "Billboard Live TAIPEI (2nd Show)",
     time: "19:00",
+    kstTime: "20:00",
     location: "Billboard Live TAIPEI",
     ticket: "Billboard Live"
   },
