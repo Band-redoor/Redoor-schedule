@@ -482,6 +482,7 @@ button:focus {
     border-radius: 50%;
     background: var(--black);
     color: var(--white) !important;
+-webkit-text-fill-color: var(--white) !important;
 
     display: flex;
     align-items: center;
