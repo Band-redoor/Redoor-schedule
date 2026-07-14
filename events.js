@@ -7,6 +7,16 @@
 
 const REDOOR_EVENTS = [
   {
+  date: "2021-01-09",
+  type: "ANNIVERSARY",
+  title: "리도어 데뷔",
+  yearly: true,
+  startYear: 2021,
+  time: "",
+  location: "",
+  tickets: []
+}
+  {
     date: "2026-01-01",
     type: "BIRTHDAY",
     title: "이등대 생일",
