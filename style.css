@@ -487,9 +487,8 @@ button:focus {
     align-items: center;
     justify-content: center;
 
-    position: relative;
-    top: -2px;
-    left: -2px;
+    top: 4px;
+    left: 4px;
 
     z-index: 2;
 }
