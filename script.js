@@ -209,10 +209,11 @@ function renderCalendar() {
       events.forEach((event) => {
         const title = document.createElement("span");
         title.className = "event-title-mini";
-        title.textContent = getDisplayTitle(
-          event,
-          cellYear
-        );
+        if (event.type === "ANNIVERSARY") {
+  title.textContent = `데뷔 ${cellYear - event.startYear}주년`;
+} else {
+  title.textContent = getDisplayTitle(event, cellYear);
+}
         titleList.appendChild(title);
       });
 
