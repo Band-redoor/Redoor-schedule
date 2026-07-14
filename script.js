@@ -178,7 +178,6 @@ function resetPanel() {
   renderCalendar();
   eventPanel.innerHTML = `
     <div class="empty-state">
-      <p class="eyebrow">REDOOR SCHEDULE</p>
       <h2>일정이 있는 날짜를 선택해주세요.</h2>
       <p>일정이 있는 날짜를 누르면 시간, 장소, 예매 정보가 여기에 표시됩니다.</p>
     </div>
