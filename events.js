@@ -32,12 +32,12 @@ const REDOOR_EVENTS = [
     date: "2026-07-17",
     type: "FESTIVAL",
     title: "Road to BU-ROCK Fukuoka",
-    time: "18:30 JST",
+    time: "18:30",
     location: "후쿠오카 DRUM LOGOS",
     ticketLinks: [
       {
-        name: "마호캐스트",
-        url: "https://www.mahocast.com/ce/c/137"
+        name: "MAHOCAST",
+        url: "https://www.mahocast.com/at/live/1841/12603"
       }
     ]
   },
@@ -54,18 +54,25 @@ const REDOOR_EVENTS = [
       },
       {
         name: "티켓링크",
-        url: "https://m.ticketlink.co.kr/product/62890"
+        url: "https://www.ticketlink.co.kr/product/62890"
+      },
+      {
+        name: "YES24",
+        url: "https://ticket.yes24.com/Perf/58384"
       },
       {
         name: "29CM",
         url: "https://www.29cm.co.kr/products/3973838"
       },
       {
+        name: "무신사",
+        url: "https://www.musinsa.com/products/6431648"
+      },
+      {
         name: "STAYG",
         url: "https://www.stayg.tv/channel/onsite/detail/10763"
       }
-    ],
-    ticket: "YES24, 무신사, BIGC"
+    ]
   },
   {
     date: "2026-07-26",
@@ -104,7 +111,15 @@ const REDOOR_EVENTS = [
     ticketLinks: [
       {
         name: "NOL 티켓",
-        url: "https://nol.yanolja.com/ticket/products/26006159"
+        url: "https://tickets.interpark.com/goods/26006159"
+      },
+      {
+        name: "YES24",
+        url: "https://ticket.yes24.com/Perf/58497"
+      },
+      {
+        name: "엔티켓(인천 할인)",
+        url: "https://ticket2.enticket.com:469/rsvc/rsv_pm_detail.html?pfmIng=1&p_idx=4242"
       },
       {
         name: "NOL WORLD",
@@ -115,18 +130,18 @@ const REDOOR_EVENTS = [
         url: "https://eplus.jp/sf/detail/4552510001"
       }
     ],
-    ticket: "KB Pay, YES24, 엔티켓(인천 할인), MODERN SKY, Trip.com"
+    ticket: "KB Pay, MODERN SKY, Trip.com"
   },
   {
     date: "2026-08-15",
     type: "FESTIVAL",
     title: "2026 Jeonju Ultimate Music Festival",
-    time: "",
+    time: "추후 공개",
     location: "전주대학교 인조잔디구장",
     ticketLinks: [
       {
-        name: "YES24 티켓",
-        url: "https://m.ticket.yes24.com/Notice/Detail.aspx?bid=17780"
+        name: "YES24",
+        url: "https://ticket.yes24.com/Perf/58283"
       }
     ]
   },
@@ -142,18 +157,22 @@ const REDOOR_EVENTS = [
     date: "2026-09-06",
     type: "FESTIVAL",
     title: "MADLY MEDLEY 2026",
-    time: "",
+    time: "추후 공개",
     location: "문화비축기지",
     ticketLinks: [
       {
         name: "NOL 티켓",
-        url: "https://nol.yanolja.com/ticket/products/26009656"
+        url: "https://tickets.interpark.com/goods/26009656"
       },
       {
         name: "멜론티켓",
-        url: "https://ticket.melon.com/"
+        url: "https://ticket.melon.com/performance/index.htm?prodId=213522"
+      },
+      {
+        name: "카카오톡 선물하기",
+        url: "https://gift.kakao.com/brand/20014"
       }
     ],
-    ticket: "Trip Events, 카카오톡 선물하기"
+    ticket: "Trip Events"
   }
 ];
