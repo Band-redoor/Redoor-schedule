@@ -54,38 +54,37 @@ function isUrl(value) {
 }
 
 function ticketHtml(event) {
-  const ticket = event.ticket || "";
-  const ticketUrl = event.ticketUrl || "";
-  const ticketName = event.ticketName || "예매하기";
+  const ticketLinks = Array.isArray(event.ticketLinks)
+    ? event.ticketLinks.filter(link => link && link.name && link.url)
+    : [];
 
-  if (!ticket && !ticketUrl) return "";
+  const ticketText = event.ticket || "";
 
-  if (ticketUrl) {
-    return `
-      <div class="detail-row">
-        <div class="detail-label">TICKET</div>
-        <div class="detail-value">
-          <a class="ticket-link" href="${ticketUrl}" target="_blank" rel="noopener">${ticketName} ↗</a>
-        </div>
-      </div>
-    `;
-  }
+  if (ticketLinks.length === 0 && !ticketText) return "";
 
-  if (isUrl(ticket)) {
-    return `
-      <div class="detail-row">
-        <div class="detail-label">TICKET</div>
-        <div class="detail-value">
-          <a class="ticket-link" href="${ticket}" target="_blank" rel="noopener">예매하기 ↗</a>
-        </div>
-      </div>
-    `;
-  }
+  const linkedTickets = ticketLinks
+    .map(link => `
+      <a class="ticket-link" href="${link.url}" target="_blank" rel="noopener">
+        ${link.name} ↗
+      </a>
+    `)
+    .join('<span class="ticket-separator"> / </span>');
+
+  const plainTicketText = ticketText
+    ? `<span class="ticket-text">${ticketText}</span>`
+    : "";
+
+  const separator =
+    linkedTickets && plainTicketText
+      ? '<span class="ticket-separator"> / </span>'
+      : "";
 
   return `
     <div class="detail-row">
       <div class="detail-label">TICKET</div>
-      <div class="detail-value">${ticket}</div>
+      <div class="detail-value ticket-list">
+        ${linkedTickets}${separator}${plainTicketText}
+      </div>
     </div>
   `;
 }

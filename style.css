@@ -595,3 +595,21 @@ button:focus {
     font-size: 25px;
   }
 }
+
+
+/* 여러 예매처 링크 표시 */
+.ticket-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 0;
+}
+
+.ticket-separator {
+  margin: 0 5px;
+  color: var(--muted);
+}
+
+.ticket-text {
+  color: var(--black);
+}

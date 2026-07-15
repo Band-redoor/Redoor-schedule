@@ -1,7 +1,7 @@
 // REDOOR 일정 데이터
-// ticketUrl이 있으면 클릭 가능한 링크로 표시됩니다.
-// ticketUrl이 없고 ticket만 있으면 예매처 이름이 텍스트로 표시됩니다.
-// 생일은 yearly: true로 매년 자동 반복됩니다.
+// ticketLinks: 클릭 가능한 예매처 링크 목록
+// ticket: 링크를 확인하지 못한 예매처를 텍스트로 표시
+// yearly: true인 일정은 매년 자동 반복
 
 const REDOOR_EVENTS = [
   {
@@ -10,7 +10,6 @@ const REDOOR_EVENTS = [
     title: "이등대 생일",
     time: "",
     location: "",
-    ticket: "",
     yearly: true
   },
   {
@@ -19,7 +18,6 @@ const REDOOR_EVENTS = [
     title: "박세웅 생일",
     time: "",
     location: "",
-    ticket: "",
     yearly: true
   },
   {
@@ -28,16 +26,20 @@ const REDOOR_EVENTS = [
     title: "최승현 생일",
     time: "",
     location: "",
-    ticket: "",
     yearly: true
   },
   {
     date: "2026-07-17",
     type: "FESTIVAL",
     title: "Road to BU-ROCK Fukuoka",
-    time: "18:30",
+    time: "18:30 JST",
     location: "후쿠오카 DRUM LOGOS",
-    ticket: "마호캐스트"
+    ticketLinks: [
+      {
+        name: "마호캐스트",
+        url: "https://www.mahocast.com/ce/c/137"
+      }
+    ]
   },
   {
     date: "2026-07-19",
@@ -45,7 +47,25 @@ const REDOOR_EVENTS = [
     title: "SOUNDBERRY FESTA' 26",
     time: "17:50 ~ 18:40",
     location: "KINTEX 제2전시장 Hall 9",
-    ticket: "NOL 티켓, 티켓링크, YES24, 29CM, 무신사, STAYG"
+    ticketLinks: [
+      {
+        name: "NOL 티켓",
+        url: "https://tickets.interpark.com/goods/26006193"
+      },
+      {
+        name: "티켓링크",
+        url: "https://m.ticketlink.co.kr/product/62890"
+      },
+      {
+        name: "29CM",
+        url: "https://www.29cm.co.kr/products/3973838"
+      },
+      {
+        name: "STAYG",
+        url: "https://www.stayg.tv/channel/onsite/detail/10763"
+      }
+    ],
+    ticket: "YES24, 무신사, BIGC"
   },
   {
     date: "2026-07-26",
@@ -54,8 +74,12 @@ const REDOOR_EVENTS = [
     time: "16:00",
     kstTime: "17:00",
     location: "Billboard Live TAIPEI",
-    ticketName: "Billboard Live",
-    ticketUrl: "https://www.billboardlivetaipei.tw/tw/events/redoor2026"
+    ticketLinks: [
+      {
+        name: "Billboard Live",
+        url: "https://www.billboardlivetaipei.tw/tw/events/redoor2026"
+      }
+    ]
   },
   {
     date: "2026-07-26",
@@ -64,8 +88,12 @@ const REDOOR_EVENTS = [
     time: "19:00",
     kstTime: "20:00",
     location: "Billboard Live TAIPEI",
-    ticketName: "Billboard Live",
-    ticketUrl: "https://www.billboardlivetaipei.tw/tw/events/redoor2026"
+    ticketLinks: [
+      {
+        name: "Billboard Live",
+        url: "https://www.billboardlivetaipei.tw/tw/events/redoor2026"
+      }
+    ]
   },
   {
     date: "2026-08-02",
@@ -73,7 +101,21 @@ const REDOOR_EVENTS = [
     title: "2026 Incheon Pentaport Rock Festival",
     time: "15:50 ~ 16:30",
     location: "송도달빛축제공원",
-    ticket: "NOL 티켓, KB Pay, YES24, 엔티켓(인천 할인), NOL WORLD, MODERN SKY, Trip.com, eplus"
+    ticketLinks: [
+      {
+        name: "NOL 티켓",
+        url: "https://nol.yanolja.com/ticket/products/26006159"
+      },
+      {
+        name: "NOL WORLD",
+        url: "https://world.nol.com/en/ticket/places/26000456/products/26006159"
+      },
+      {
+        name: "eplus",
+        url: "https://eplus.jp/sf/detail/4552510001"
+      }
+    ],
+    ticket: "KB Pay, YES24, 엔티켓(인천 할인), MODERN SKY, Trip.com"
   },
   {
     date: "2026-08-15",
@@ -81,7 +123,12 @@ const REDOOR_EVENTS = [
     title: "2026 Jeonju Ultimate Music Festival",
     time: "",
     location: "전주대학교 인조잔디구장",
-    ticket: "YES24 티켓"
+    ticketLinks: [
+      {
+        name: "YES24 티켓",
+        url: "https://m.ticket.yes24.com/Notice/Detail.aspx?bid=17780"
+      }
+    ]
   },
   {
     date: "2026-08-26",
@@ -89,7 +136,6 @@ const REDOOR_EVENTS = [
     title: "주상욱 생일",
     time: "",
     location: "",
-    ticket: "",
     yearly: true
   },
   {
@@ -98,6 +144,16 @@ const REDOOR_EVENTS = [
     title: "MADLY MEDLEY 2026",
     time: "",
     location: "문화비축기지",
-    ticket: "멜론티켓, NOL티켓, Trip Events, 카카오톡 선물하기"
+    ticketLinks: [
+      {
+        name: "NOL 티켓",
+        url: "https://nol.yanolja.com/ticket/products/26009656"
+      },
+      {
+        name: "멜론티켓",
+        url: "https://ticket.melon.com/"
+      }
+    ],
+    ticket: "Trip Events, 카카오톡 선물하기"
   }
 ];
