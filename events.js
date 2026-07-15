@@ -185,8 +185,6 @@ const REDOOR_EVENTS = [
     ],
     ticket: "Trip Events"
   },
-    ticket: "Trip Events"
-  },
   {
     date: "2026-10-17",
     type: "FESTIVAL",
