@@ -4,6 +4,7 @@ const upcomingList = document.getElementById("upcomingList");
 const eventPanel = document.getElementById("eventPanel");
 const prevMonthButton = document.getElementById("prevMonth");
 const nextMonthButton = document.getElementById("nextMonth");
+const monthControl = document.querySelector(".month-control");
 
 const today = new Date();
 let currentYear = today.getFullYear();
@@ -11,18 +12,8 @@ let currentMonth = today.getMonth();
 let selectedDate = null;
 
 const monthNames = [
-  "JANUARY",
-  "FEBRUARY",
-  "MARCH",
-  "APRIL",
-  "MAY",
-  "JUNE",
-  "JULY",
-  "AUGUST",
-  "SEPTEMBER",
-  "OCTOBER",
-  "NOVEMBER",
-  "DECEMBER"
+  "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+  "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
 ];
 
 function pad(value) {
@@ -33,81 +24,59 @@ function formatDateKey(year, month, date) {
   return `${year}-${pad(month + 1)}-${pad(date)}`;
 }
 
-function getEventsByDate(dateKey) {
-  return REDOOR_EVENTS.filter((event) => {
-    if (event.yearly) {
-      return event.date.slice(5) === dateKey.slice(5);
-    }
+function getDisplayDate(event, year = currentYear) {
+  return event.yearly ? `${year}-${event.date.slice(5)}` : event.date;
+}
 
-    return event.date === dateKey;
-  });
+function getEventsByDate(dateKey) {
+  return REDOOR_EVENTS
+    .filter(event => {
+      if (event.yearly) {
+        return event.date.slice(5) === dateKey.slice(5);
+      }
+      return event.date === dateKey;
+    })
+    .map(event => ({
+      ...event,
+      displayDate: event.yearly ? dateKey : event.date
+    }));
 }
 
 function formatUpcomingDate(dateString) {
   const date = new Date(`${dateString}T00:00:00`);
   const month = monthNames[date.getMonth()].slice(0, 3);
-  const weekday = [
-    "SUN",
-    "MON",
-    "TUE",
-    "WED",
-    "THU",
-    "FRI",
-    "SAT"
-  ][date.getDay()];
-
+  const weekday = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"][date.getDay()];
   return `${month} ${date.getDate()} ${weekday}`;
 }
 
-function getDisplayTitle(event, displayYear = currentYear) {
-  if (event.type === "ANNIVERSARY" && event.startYear) {
-    const anniversary = displayYear - event.startYear;
-
-    if (anniversary > 0) {
-      return `${event.title} ${anniversary}주년`;
-    }
-  }
-
-  return event.title;
+function isUrl(value) {
+  return /^https?:\/\//i.test(value || "");
 }
 
-function ticketHtml(tickets) {
-  if (!tickets || tickets.length === 0) {
-    return "";
+function ticketHtml(ticket) {
+  if (!ticket) return "";
+
+  if (isUrl(ticket)) {
+    return `
+      <div class="detail-row">
+        <div class="detail-label">TICKET</div>
+        <div class="detail-value">
+          <a class="ticket-link" href="${ticket}" target="_blank" rel="noopener">예매하기 ↗</a>
+        </div>
+      </div>
+    `;
   }
 
   return `
     <div class="detail-row">
       <div class="detail-label">TICKET</div>
-      <div class="detail-value">
-        ${tickets
-          .map((ticket) => {
-            if (ticket.url) {
-              return `
-                <a
-                  class="ticket-link"
-                  href="${ticket.url}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  ${ticket.name}
-                </a>
-              `;
-            }
-
-            return `<span>${ticket.name}</span>`;
-          })
-          .join(", ")}
-      </div>
+      <div class="detail-value">${ticket}</div>
     </div>
   `;
 }
 
 function optionalDetailRow(label, value) {
-  if (!value) {
-    return "";
-  }
-
+  if (!value) return "";
   return `
     <div class="detail-row">
       <div class="detail-label">${label}</div>
@@ -122,15 +91,8 @@ function renderCalendar() {
 
   const firstDay = new Date(currentYear, currentMonth, 1).getDay();
   const lastDate = new Date(currentYear, currentMonth + 1, 0).getDate();
-  const previousMonthLastDate = new Date(
-    currentYear,
-    currentMonth,
-    0
-  ).getDate();
-
-  const totalCells =
-    Math.ceil((firstDay + lastDate) / 7) * 7;
-
+  const previousMonthLastDate = new Date(currentYear, currentMonth, 0).getDate();
+  const totalCells = Math.ceil((firstDay + lastDate) / 7) * 7;
   const todayKey = formatDateKey(
     today.getFullYear(),
     today.getMonth(),
@@ -144,11 +106,9 @@ function renderCalendar() {
     let otherMonth = false;
 
     if (index < firstDay) {
-      cellDate =
-        previousMonthLastDate - firstDay + index + 1;
+      cellDate = previousMonthLastDate - firstDay + index + 1;
       cellMonth -= 1;
       otherMonth = true;
-
       if (cellMonth < 0) {
         cellMonth = 11;
         cellYear -= 1;
@@ -157,7 +117,6 @@ function renderCalendar() {
       cellDate = index - firstDay - lastDate + 1;
       cellMonth += 1;
       otherMonth = true;
-
       if (cellMonth > 11) {
         cellMonth = 0;
         cellYear += 1;
@@ -166,68 +125,37 @@ function renderCalendar() {
       cellDate = index - firstDay + 1;
     }
 
-    const dateKey = formatDateKey(
-      cellYear,
-      cellMonth,
-      cellDate
-    );
-
-    const events = otherMonth
-      ? []
-      : getEventsByDate(dateKey);
+    const dateKey = formatDateKey(cellYear, cellMonth, cellDate);
+    const events = otherMonth ? [] : getEventsByDate(dateKey);
 
     const cell = document.createElement("button");
     cell.type = "button";
     cell.className = "date-cell";
     cell.setAttribute("aria-label", dateKey);
 
-    if (otherMonth) {
-      cell.classList.add("other-month");
-    }
-
-    if (events.length > 0) {
-      cell.classList.add("has-event");
-    }
-
-    if (dateKey === todayKey) {
-      cell.classList.add("today");
-    }
-
-    if (selectedDate === dateKey) {
-      cell.classList.add("selected");
-    }
+    if (otherMonth) cell.classList.add("other-month");
+    if (events.length > 0) cell.classList.add("has-event");
+    if (dateKey === todayKey) cell.classList.add("today");
+    if (selectedDate === dateKey) cell.classList.add("selected");
 
     const number = document.createElement("span");
     number.className = "date-number";
     number.textContent = cellDate;
-    
-    if (cellDate < 10) {
-
-  number.classList.add("single-digit");
-
-}
     cell.appendChild(number);
 
     if (events.length > 0) {
       const titleList = document.createElement("span");
       titleList.className = "event-title-list";
 
-      events.forEach((event) => {
+      events.forEach(event => {
         const title = document.createElement("span");
         title.className = "event-title-mini";
-        if (event.type === "ANNIVERSARY") {
-  title.textContent = `데뷔 ${cellYear - event.startYear}주년`;
-} else {
-  title.textContent = getDisplayTitle(event, cellYear);
-}
+        title.textContent = event.title;
         titleList.appendChild(title);
       });
 
       cell.appendChild(titleList);
-
-      cell.addEventListener("click", () => {
-        selectEvents(events, dateKey);
-      });
+      cell.addEventListener("click", () => selectEvents(events, dateKey));
     } else {
       cell.disabled = true;
     }
@@ -239,29 +167,23 @@ function renderCalendar() {
 }
 
 function renderUpcoming() {
-  const currentMonthNumber = pad(currentMonth + 1);
+  const monthPrefix = `${currentYear}-${pad(currentMonth + 1)}`;
 
   const monthEvents = REDOOR_EVENTS
-    .filter((event) => {
+    .filter(event => {
       if (event.yearly) {
-        return event.date.slice(5, 7) === currentMonthNumber;
+        return event.date.slice(5, 7) === pad(currentMonth + 1);
       }
-
-      const monthPrefix = `${currentYear}-${currentMonthNumber}`;
       return event.date.startsWith(monthPrefix);
     })
+    .map(event => ({
+      ...event,
+      displayDate: getDisplayDate(event)
+    }))
     .sort((a, b) => {
-      const dateCompare = a.date
-        .slice(5)
-        .localeCompare(b.date.slice(5));
-
-      if (dateCompare !== 0) {
-        return dateCompare;
-      }
-
-      return (a.time || "").localeCompare(
-        b.time || ""
-      );
+      const dateCompare = a.displayDate.localeCompare(b.displayDate);
+      if (dateCompare !== 0) return dateCompare;
+      return (a.time || "").localeCompare(b.time || "");
     });
 
   upcomingList.innerHTML = "";
@@ -272,59 +194,30 @@ function renderUpcoming() {
     return;
   }
 
-  monthEvents.forEach((event) => {
-    const displayDate = event.yearly
-      ? `${currentYear}-${event.date.slice(5)}`
-      : event.date;
-
+  monthEvents.forEach(event => {
     const item = document.createElement("button");
     item.type = "button";
     item.className = "upcoming-item";
-
     item.innerHTML = `
-      <div class="upcoming-date">
-        ${formatUpcomingDate(displayDate)}
-      </div>
-
+      <div class="upcoming-date">${formatUpcomingDate(event.displayDate)}</div>
       <div>
-        <div class="upcoming-title">
-          [${event.type}] ${getDisplayTitle(
-            event,
-            currentYear
-          )}
-        </div>
-
-        <div class="upcoming-meta">
-          ${event.location || ""}
-        </div>
+        <div class="upcoming-title">[${event.type}] ${event.title}</div>
+        <div class="upcoming-meta">${event.location || ""}</div>
       </div>
-
-      <div class="upcoming-time">
-        ${event.time || ""} &nbsp;›
-      </div>
+      <div class="upcoming-time">${event.time || ""} &nbsp;›</div>
     `;
-
-    item.addEventListener("click", () => {
-      selectEvents([event], displayDate);
-    });
-
+    item.addEventListener("click", () =>
+      selectEvents([event], event.displayDate)
+    );
     upcomingList.appendChild(item);
   });
 }
 
-function eventBlock(event, displayYear) {
-  const displayTitle = getDisplayTitle(
-    event,
-    displayYear
-  );
-
+function eventBlock(event) {
   return `
     <section class="selected-event">
-      <h2>${displayTitle}</h2>
-
-      <span class="event-type">
-        ${event.type}
-      </span>
+      <h2>${event.title}</h2>
+      <span class="event-type">${event.type}</span>
 
       <div class="detail-list">
         ${optionalDetailRow(
@@ -333,110 +226,86 @@ function eventBlock(event, displayYear) {
             ? `현지 ${event.time} / 한국 ${event.kstTime}`
             : event.time
         )}
-
-        ${optionalDetailRow(
-          "LOCATION",
-          event.location
-        )}
-
-        ${ticketHtml(event.tickets)}
+        ${optionalDetailRow("LOCATION", event.location)}
+        ${ticketHtml(event.ticket)}
       </div>
     </section>
   `;
 }
 
-function selectEvents(
-  events,
-  dateKey = events[0].date
-) {
-  selectedDate = dateKey;
+function selectEvents(events, clickedDate = events[0].displayDate || events[0].date) {
+  selectedDate = clickedDate;
   renderCalendar();
 
-  const displayYear = Number(
-    dateKey.slice(0, 4)
-  );
-
   eventPanel.innerHTML = `
-    <button
-      class="close-button"
-      type="button"
-      aria-label="상세 닫기"
-    >
-      ×
-    </button>
-
-    <p class="event-date">
-      ${selectedDate.replaceAll("-", ".")}
-    </p>
-
-    ${events
-      .map((event) =>
-        eventBlock(event, displayYear)
-      )
-      .join("")}
+    <button class="close-button" type="button" aria-label="상세 닫기">×</button>
+    <p class="event-date">${selectedDate.replaceAll("-", ".")}</p>
+    ${events.map(event => eventBlock(event)).join("")}
   `;
 
-  eventPanel
-    .querySelectorAll(".selected-event")
-    .forEach((block, index) => {
-      if (index > 0) {
-        block.style.marginTop = "42px";
-        block.style.paddingTop = "42px";
-        block.style.borderTop =
-          "1px solid var(--inner-line)";
-      }
-    });
+  eventPanel.querySelectorAll(".selected-event").forEach((block, index) => {
+    if (index > 0) {
+      block.style.marginTop = "42px";
+      block.style.paddingTop = "42px";
+      block.style.borderTop = "1px solid var(--inner-line)";
+    }
+  });
 
   eventPanel
     .querySelector(".close-button")
     .addEventListener("click", resetPanel);
 
   if (window.innerWidth <= 980) {
-    eventPanel.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
+    eventPanel.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
 
 function resetPanel() {
   selectedDate = null;
   renderCalendar();
-
   eventPanel.innerHTML = `
     <div class="empty-state">
-      <h2>
-        일정이 있는 날짜를 선택해주세요.
-      </h2>
-
-      <p>
-        일정이 있는 날짜를 누르면 시간, 장소,
-        예매 정보가 여기에 표시됩니다.
-      </p>
+      <h2>일정이 있는 날짜를 선택해주세요.</h2>
+      <p>일정이 있는 날짜를 누르면 시간, 장소, 예매 정보가 여기에 표시됩니다.</p>
     </div>
   `;
 }
 
-prevMonthButton.addEventListener("click", () => {
-  currentMonth -= 1;
+function moveMonth(amount) {
+  currentMonth += amount;
 
   if (currentMonth < 0) {
     currentMonth = 11;
     currentYear -= 1;
-  }
-
-  resetPanel();
-});
-
-nextMonthButton.addEventListener("click", () => {
-  currentMonth += 1;
-
-  if (currentMonth > 11) {
+  } else if (currentMonth > 11) {
     currentMonth = 0;
     currentYear += 1;
   }
 
   resetPanel();
+}
+
+prevMonthButton.addEventListener("click", () => moveMonth(-1));
+nextMonthButton.addEventListener("click", () => moveMonth(1));
+
+/* 화살표를 월 제목 양옆으로 정렬 */
+monthControl.insertBefore(monthTitle, nextMonthButton);
+
+/* 현재 달로 돌아가는 HOME 버튼 생성 */
+const homeMonthButton = document.createElement("button");
+homeMonthButton.id = "homeMonth";
+homeMonthButton.className = "home-month-button";
+homeMonthButton.type = "button";
+homeMonthButton.textContent = "HOME";
+homeMonthButton.setAttribute("aria-label", "현재 달로 이동");
+
+homeMonthButton.addEventListener("click", () => {
+  const now = new Date();
+  currentYear = now.getFullYear();
+  currentMonth = now.getMonth();
+  resetPanel();
 });
+
+monthControl.appendChild(homeMonthButton);
 
 renderCalendar();

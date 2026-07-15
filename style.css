@@ -532,3 +532,58 @@ button:focus {
     gap: 14px;
   }
 }
+
+
+/* 월 이동 영역: 이전 화살표 - 월 - 다음 화살표 - HOME */
+.month-control {
+  display: grid;
+  grid-template-columns: 42px auto 42px auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.month-control h1 {
+  margin: 0 8px;
+  min-width: 150px;
+  text-align: center;
+}
+
+.home-month-button {
+  height: 42px;
+  margin-left: 8px;
+  padding: 0 15px;
+  border: 1px solid var(--black);
+  background: var(--black);
+  color: var(--white) !important;
+  -webkit-text-fill-color: var(--white) !important;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.home-month-button:hover {
+  opacity: 0.75;
+}
+
+@media (max-width: 680px) {
+  .month-control {
+    grid-template-columns: 42px minmax(112px, auto) 42px auto;
+    gap: 8px;
+  }
+
+  .month-control h1 {
+    min-width: 112px;
+    margin: 0;
+    font-size: 25px;
+  }
+
+  .home-month-button {
+    height: 42px;
+    margin-left: 0;
+    padding: 0 10px;
+    font-size: 9px;
+  }
+}
