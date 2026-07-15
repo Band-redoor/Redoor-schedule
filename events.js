@@ -2,8 +2,18 @@
 // ticketLinks: 클릭 가능한 예매처 링크 목록
 // ticket: 링크를 확인하지 못한 예매처를 텍스트로 표시
 // yearly: true인 일정은 매년 자동 반복
+// ANNIVERSARY + startYear는 "데뷔 0주년, 1주년..."으로 자동 계산
 
 const REDOOR_EVENTS = [
+  {
+    date: "2021-01-09",
+    type: "ANNIVERSARY",
+    title: "리도어 데뷔",
+    yearly: true,
+    startYear: 2021,
+    time: "",
+    location: ""
+  },
   {
     date: "2026-01-01",
     type: "BIRTHDAY",

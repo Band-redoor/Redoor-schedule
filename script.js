@@ -28,6 +28,16 @@ function getDisplayDate(event, year = currentYear) {
   return event.yearly ? `${year}-${event.date.slice(5)}` : event.date;
 }
 
+function getEventTitle(event, displayDate = event.displayDate || event.date) {
+  if (event.type === "ANNIVERSARY" && Number.isInteger(event.startYear)) {
+    const displayYear = Number(displayDate.slice(0, 4));
+    const anniversaryYear = displayYear - event.startYear;
+    return `${event.title} ${anniversaryYear}주년`;
+  }
+
+  return event.title;
+}
+
 function getEventsByDate(dateKey) {
   return REDOOR_EVENTS
     .filter(event => {
@@ -164,7 +174,7 @@ function renderCalendar() {
       events.forEach(event => {
         const title = document.createElement("span");
         title.className = "event-title-mini";
-        title.textContent = event.title;
+        title.textContent = getEventTitle(event, event.displayDate);
         titleList.appendChild(title);
       });
 
@@ -215,7 +225,7 @@ function renderUpcoming() {
     item.innerHTML = `
       <div class="upcoming-date">${formatUpcomingDate(event.displayDate)}</div>
       <div>
-        <div class="upcoming-title">[${event.type}] ${event.title}</div>
+        <div class="upcoming-title">[${event.type}] ${getEventTitle(event, event.displayDate)}</div>
         <div class="upcoming-meta">${event.location || ""}</div>
       </div>
       <div class="upcoming-time">${event.time || ""} &nbsp;›</div>
@@ -230,7 +240,7 @@ function renderUpcoming() {
 function eventBlock(event) {
   return `
     <section class="selected-event">
-      <h2>${event.title}</h2>
+      <h2>${getEventTitle(event, event.displayDate)}</h2>
       <span class="event-type">${event.type}</span>
 
       <div class="detail-list">
