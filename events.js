@@ -184,5 +184,15 @@ const REDOOR_EVENTS = [
       }
     ],
     ticket: "Trip Events"
+  },
+    ticket: "Trip Events"
+  },
+  {
+    date: "2026-10-17",
+    type: "FESTIVAL",
+    title: "GRAND MINT FESTIVAL 2026",
+    time: "추후 공개",
+    location: "올림픽공원",
+    ticket: "NOL 티켓, YES24, NAVER"
   }
 ];
