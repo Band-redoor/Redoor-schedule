@@ -164,6 +164,11 @@ function renderCalendar() {
 
     const number = document.createElement("span");
     number.className = "date-number";
+
+    if (cellDate < 10) {
+  number.classList.add("single-digit");
+}
+    
     number.textContent = cellDate;
     cell.appendChild(number);
 
