@@ -53,8 +53,23 @@ function isUrl(value) {
   return /^https?:\/\//i.test(value || "");
 }
 
-function ticketHtml(ticket) {
-  if (!ticket) return "";
+function ticketHtml(event) {
+  const ticket = event.ticket || "";
+  const ticketUrl = event.ticketUrl || "";
+  const ticketName = event.ticketName || "예매하기";
+
+  if (!ticket && !ticketUrl) return "";
+
+  if (ticketUrl) {
+    return `
+      <div class="detail-row">
+        <div class="detail-label">TICKET</div>
+        <div class="detail-value">
+          <a class="ticket-link" href="${ticketUrl}" target="_blank" rel="noopener">${ticketName} ↗</a>
+        </div>
+      </div>
+    `;
+  }
 
   if (isUrl(ticket)) {
     return `
@@ -227,7 +242,7 @@ function eventBlock(event) {
             : event.time
         )}
         ${optionalDetailRow("LOCATION", event.location)}
-        ${ticketHtml(event.ticket)}
+        ${ticketHtml(event)}
       </div>
     </section>
   `;
