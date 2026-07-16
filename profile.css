@@ -33,7 +33,7 @@ a {
 
 .profile-brand img {
   display: block;
-  width: 165px;
+  width: 190px;
   height: auto;
   margin-left: -14px;
 }
@@ -70,7 +70,7 @@ a {
 
 .profile-title-row h1 {
   margin: 0;
-  font-size: clamp(42px, 5vw, 72px);
+  font-size: clamp(32px, 3vw, 36px);
   line-height: 0.9;
   letter-spacing: -0.07em;
 }
@@ -207,7 +207,7 @@ a {
   }
 
   .profile-brand img {
-    width: 145px;
+    width: 170px;
     margin-left: -10px;
   }
 
@@ -224,7 +224,7 @@ a {
   }
 
   .profile-title-row h1 {
-    font-size: 44px;
+    font-size: 32px;
   }
 
   .member-grid {
