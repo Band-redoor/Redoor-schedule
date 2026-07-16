@@ -1,4 +1,5 @@
 const profileIntro = document.getElementById("profileIntro");
+const introSeenKey = "redoorProfileIntroSeen";
 
 function hideProfileIntro() {
   if (!profileIntro || profileIntro.classList.contains("is-hidden")) return;
@@ -6,7 +7,10 @@ function hideProfileIntro() {
   profileIntro.classList.add("is-hidden");
 }
 
-if (profileIntro) {
+if (profileIntro && sessionStorage.getItem(introSeenKey) === "true") {
+  profileIntro.classList.add("is-hidden");
+} else if (profileIntro) {
+  sessionStorage.setItem(introSeenKey, "true");
   window.setTimeout(hideProfileIntro, 1200);
   profileIntro.addEventListener("click", hideProfileIntro, { once: true });
   window.addEventListener("touchstart", hideProfileIntro, { once: true, passive: true });

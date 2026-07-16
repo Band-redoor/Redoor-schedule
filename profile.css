@@ -44,7 +44,7 @@ a {
 }
 
 .profile-nav a {
-  padding: 10px 0;
+  padding: 4px 0 3px;
   border-bottom: 2px solid transparent;
   font-size: 13px;
   font-weight: 700;
@@ -57,7 +57,7 @@ a {
 
 .profile-main {
   min-height: calc(100vh - 164px);
-  padding: 48px 4vw 58px;
+  padding: 32px 4vw 58px;
 }
 
 .profile-title-row {
@@ -70,8 +70,9 @@ a {
 
 .profile-title-row h1 {
   margin: 0 0 0 auto;
-  font-size: clamp(32px, 3vw, 36px);
-  line-height: 0.9;
+  font-size: clamp(28px, 2.6vw, 32px);
+  font-weight: 600;
+  line-height: 1;
   letter-spacing: -0.07em;
 }
 
@@ -220,11 +221,11 @@ a {
   }
 
   .profile-main {
-    padding: 30px 18px 42px;
+    padding: 22px 18px 42px;
   }
 
   .profile-title-row h1 {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .member-grid {
