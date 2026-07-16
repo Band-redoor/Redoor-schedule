@@ -57,7 +57,7 @@ a {
 
 .profile-main {
   min-height: calc(100vh - 164px);
-  padding: 32px 4vw 58px;
+  padding: 63px 4vw 58px;
 }
 
 .profile-title-row {
@@ -221,7 +221,7 @@ a {
   }
 
   .profile-main {
-    padding: 22px 18px 42px;
+    padding: 44px 18px 42px;
   }
 
   .profile-title-row h1 {
