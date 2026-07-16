@@ -81,8 +81,9 @@ function ticketHtml(event) {
     `)
     .join('<span class="ticket-separator"> / </span>');
 
-  const plainTicketText = ticketText
-    ? `<span class="ticket-text">${ticketText}</span>`
+  const normalizedTicketText = ticketText.replace(/,\s*/g, " / ");
+  const plainTicketText = normalizedTicketText
+    ? `<span class="ticket-text">${normalizedTicketText}</span>`
     : "";
 
   const separator =

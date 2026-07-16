@@ -473,10 +473,6 @@ button:focus {
     margin-left: -10px;
   }
 
-  .top-nav a:not(.active) {
-    display: none;
-  }
-
   .calendar-section,
   .event-panel {
     padding: 30px 18px 42px;
