@@ -79,7 +79,7 @@ a {
 }
 
 .calendar-section {
-  padding: 17px 3vw 58px;
+  padding: 48px 3vw 58px;
   border-right: 1px solid var(--inner-line);
 }
 
@@ -212,6 +212,11 @@ a {
 .date-cell.has-event .date-number.single-digit::after {
   width: 13px;
   margin-left: -2px;
+}
+
+/* 오늘은 일정 유무와 관계없이 날짜 동그라미만 표시한다. */
+.date-cell.today.has-event .date-number::after {
+  display: none;
 }
 
 .today .date-number {
@@ -359,10 +364,28 @@ a {
 
 .event-type {
   display: inline-block;
-  margin-bottom: 28px;
   padding: 7px 11px 6px;
   color: var(--white);
   background: var(--black);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.event-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.event-dday {
+  display: inline-block;
+  padding: 6px 10px 5px;
+  border: 1px solid var(--black);
+  color: var(--black);
+  background: var(--white);
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -421,8 +444,15 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 20px;
-  font-size: 11px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.site-updated {
+  white-space: nowrap;
 }
 
 button,
@@ -474,7 +504,7 @@ button:focus {
   }
 
   .calendar-section {
-    padding: 8px 18px 42px;
+    padding: 30px 18px 42px;
   }
 
   .event-panel {
@@ -579,12 +609,10 @@ button:focus {
 .month-heading h1 {
   margin: 0;
   text-align: center;
-  font-family: Arial, "Pretendard", "Noto Sans KR", sans-serif;
   font-size: clamp(28px, 2.6vw, 32px);
   font-weight: 600;
-  line-height: 1;
   letter-spacing: -0.07em;
-  text-transform: uppercase;
+  line-height: 1;
 }
 
 #prevMonth,
@@ -623,15 +651,10 @@ button:focus {
     padding-bottom: 13px;
   }
 
-.month-heading h1 {
-  margin: 0;
-  font-family: Arial, "Pretendard", "Noto Sans KR", sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.07em;
-  text-transform: uppercase;
-}
+  .month-heading h1 {
+    margin: 0;
+    font-size: 28px;
+  }
 
   .month-year {
     font-size: 11px;

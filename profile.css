@@ -22,13 +22,9 @@ a {
   text-decoration: none;
 }
 
-/* =========================
-   HEADER
-========================= */
-
 .profile-header {
-  height: 94px; /* 헤더 높이 */
-  padding: 0 4vw; /* 좌우 여백 */
+  height: 94px;
+  padding: 0 4vw;
   border-bottom: 1px solid var(--line);
   display: flex;
   align-items: center;
@@ -37,44 +33,36 @@ a {
 
 .profile-brand img {
   display: block;
-  width: 190px; /* 로고 크기 */
+  width: 190px;
   height: auto;
-  margin-left: -14px; /* 로고 위치 */
+  margin-left: -14px;
 }
 
 .profile-nav {
   display: flex;
-  gap: 42px; /* 메뉴 간격 */
+  gap: 42px;
 }
 
 .profile-nav a {
   padding: 4px 0 3px;
   border-bottom: 2px solid transparent;
-  font-size: 13px; /* 메뉴 글씨 크기 */
-  font-weight: 700; /* 메뉴 굵기 */
-  letter-spacing: 0.04em; /* 메뉴 자간 */
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .profile-nav a.active {
   border-bottom-color: var(--black);
 }
 
-/* =========================
-   MAIN
-========================= */
-
 .profile-main {
   min-height: calc(100vh - 164px);
-  padding: 63px 4vw 58px; /* 위 / 좌우 / 아래 여백 */
+  padding: 63px 4vw 58px;
 }
 
-/* =========================
-   TITLE
-========================= */
-
 .profile-title-row {
-  padding-bottom: 14px; /* 제목과 선 사이 간격 */
-  border-bottom: 2px solid var(--black); /* 제목 아래 선 */
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--black);
   display: flex;
   align-items: end;
   justify-content: space-between;
@@ -82,21 +70,17 @@ a {
 
 .profile-title-row h1 {
   margin: 0 0 0 auto;
-  font-size: clamp(28px, 2.6vw, 32px); /* 제목 크기 */
-  font-weight: 600; /* 제목 굵기 */
+  font-size: clamp(28px, 2.6vw, 32px);
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: -0.07em; /* 제목 자간 */
+  letter-spacing: -0.07em;
 }
-
-/* =========================
-   MEMBER GRID
-========================= */
 
 .member-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 28px; /* 카드 간격 */
-  padding: 30px 0 38px; /* 위 / 아래 여백 */
+  gap: 28px;
+  padding: 30px 0 38px;
 }
 
 .member-card {
@@ -104,7 +88,7 @@ a {
 }
 
 .member-photo-frame {
-  aspect-ratio: 4 / 5; /* 사진 비율 */
+  aspect-ratio: 4 / 5;
   background: var(--placeholder);
   overflow: hidden;
 }
@@ -119,7 +103,7 @@ a {
 
 .member-card h2 {
   margin: 15px 0 7px;
-  font-size: clamp(20px, 2vw, 30px); /* 이름 크기 */
+  font-size: clamp(20px, 2vw, 30px);
   letter-spacing: -0.05em;
 }
 
@@ -132,7 +116,7 @@ a {
 .member-card p {
   margin: 0 0 0 5px;
   color: var(--muted);
-  font-size: 11px; /* 설명 크기 */
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.06em;
 }
@@ -142,7 +126,7 @@ a {
   margin-top: 4px;
   margin-left: 5px;
   color: var(--muted);
-  font-size: 11px; /* 인스타 크기 */
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.06em;
   transition: color 180ms ease;
@@ -150,7 +134,7 @@ a {
 
 @media (hover: hover) and (pointer: fine) {
   .member-card:hover .member-photo {
-    transform: scale(1.025); /* 사진 확대 */
+    transform: scale(1.025);
   }
 
   .member-instagram:hover {
@@ -158,28 +142,23 @@ a {
   }
 }
 
-/* =========================
-   FOOTER
-========================= */
-
 .profile-footer {
-  min-height: 70px; /* 푸터 높이 */
+  min-height: 70px;
   padding: 0 4vw;
   border-top: 1px solid var(--line);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 11px;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: var(--muted);
+  font-size: 10px;
   letter-spacing: 0.08em;
 }
 
-.profile-footer strong {
-  font-size: 12px;
+.site-updated {
+  white-space: nowrap;
 }
-
-/* =========================
-   INTRO
-========================= */
 
 .profile-intro {
   position: fixed;
@@ -203,8 +182,8 @@ a {
 }
 
 .intro-image {
-  width: min(82vw, 1000px); /* 사진 너비 */
-  height: min(58vw, 620px); /* 사진 높이 */
+  width: min(82vw, 1000px);
+  height: min(58vw, 620px);
   background: #2b2b2b;
   overflow: hidden;
 }
@@ -221,40 +200,35 @@ a {
 .profile-intro p {
   margin: 0;
   color: #b9b9b9;
-  font-size: 10px; /* 문구 크기 */
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.12em;
 }
 
-/* =========================
-   MOBILE
-========================= */
-
 @media (max-width: 680px) {
-
   .profile-header {
-    height: 76px; /* 모바일 헤더 */
+    height: 76px;
   }
 
   .profile-brand img {
-    width: 170px; /* 모바일 로고 */
+    width: 170px;
     margin-left: -10px;
   }
 
   .profile-nav {
-    gap: 18px; /* 모바일 메뉴 간격 */
+    gap: 18px;
   }
 
   .profile-nav a {
-    font-size: 11px; /* 모바일 메뉴 글씨 */
+    font-size: 11px;
   }
 
   .profile-main {
-    padding: 44px 18px 42px; /* 모바일 여백 */
+    padding: 44px 18px 42px;
   }
 
   .profile-title-row h1 {
-    font-size: 28px; /* 모바일 제목 */
+    font-size: 28px;
   }
 
   .member-grid {
@@ -265,7 +239,7 @@ a {
 
   .member-card h2 {
     margin-top: 10px;
-    font-size: 22px; /* 모바일 이름 */
+    font-size: 22px;
   }
 
   .profile-footer {
@@ -278,10 +252,6 @@ a {
     height: 59vw;
   }
 }
-
-/* =========================
-   REDUCED MOTION
-========================= */
 
 @media (prefers-reduced-motion: reduce) {
   .profile-intro {

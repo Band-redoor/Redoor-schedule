@@ -245,11 +245,30 @@ function renderUpcoming() {
   });
 }
 
+function getDdayLabel(dateString, type) {
+  if (!dateString || !["LIVE", "FESTIVAL"].includes(type)) return "";
+
+  const [year, month, day] = dateString.split("-").map(Number);
+  const now = new Date();
+  const todayUtc = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  const eventUtc = Date.UTC(year, month - 1, day);
+  const difference = Math.round((eventUtc - todayUtc) / 86400000);
+
+  if (difference === 0) return "D-DAY";
+  if (difference > 0) return `D-${difference}`;
+  return "종료";
+}
+
 function eventBlock(event) {
+  const ddayLabel = getDdayLabel(event.displayDate || event.date, event.type);
+
   return `
     <section class="selected-event">
       <h2>${getEventTitle(event, event.displayDate)}</h2>
-      <span class="event-type">${event.type}</span>
+      <div class="event-badges">
+        <span class="event-type">${event.type}</span>
+        ${ddayLabel ? `<span class="event-dday">${ddayLabel}</span>` : ""}
+      </div>
 
       <div class="detail-list">
         ${optionalDetailRow(
