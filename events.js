@@ -204,6 +204,19 @@ const REDOOR_EVENTS = [
     title: "GRAND MINT FESTIVAL 2026",
     time: "추후 공개",
     location: "올림픽공원",
-    ticket: "NOL 티켓, YES24, NAVER"
+    ticketLinks: [
+      {
+        name: "NOL 티켓",
+        url: "https://tickets.interpark.com/goods/26010721"
+      },
+      {
+        name: "YES24",
+        url: "https://ticket.yes24.com/Perf/59339"
+      },
+      {
+        name: "NAVER",
+        url: "https://booking.naver.com/booking/12/bizes/1702892"
+      }
+    ]
   }
 ];
